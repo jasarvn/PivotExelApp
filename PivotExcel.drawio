@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2020-02-28T06:19:23.461Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="DVQO8zuGJeAKWCaCWXw-" version="12.7.9" type="github" pages="3">
+<mxfile host="www.draw.io" modified="2020-02-28T07:02:19.530Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="MXRYaUlodSn_7dlMq5FE" version="12.7.9" type="github" pages="3">
   <diagram id="ts8CG4xzYkmGWjCo2JDu" name="Birds Eye View">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -111,6 +111,21 @@
       <root>
         <mxCell id="rs7_zYII5Gm7obPiyec2-0" />
         <mxCell id="rs7_zYII5Gm7obPiyec2-1" parent="rs7_zYII5Gm7obPiyec2-0" />
+        <mxCell id="W3C7x5xnFC-iHkXAFwD7-0" value="Master Table" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="rs7_zYII5Gm7obPiyec2-1">
+          <mxGeometry x="140" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="W3C7x5xnFC-iHkXAFwD7-1" value="Process Pivot" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="rs7_zYII5Gm7obPiyec2-1">
+          <mxGeometry x="360" y="470" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="W3C7x5xnFC-iHkXAFwD7-2" value="Pivot Table" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="rs7_zYII5Gm7obPiyec2-1">
+          <mxGeometry x="340" y="620" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bifUh8xcIL4m-kemcnqP-0" value="input number of pivot tables" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" vertex="1" parent="rs7_zYII5Gm7obPiyec2-1">
+          <mxGeometry x="365" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bifUh8xcIL4m-kemcnqP-1" value="input Name of each Pivot table" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" vertex="1" parent="rs7_zYII5Gm7obPiyec2-1">
+          <mxGeometry x="350" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
