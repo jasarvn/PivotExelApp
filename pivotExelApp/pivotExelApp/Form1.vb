@@ -5,6 +5,14 @@ Public Class Form1
     Private fileNameReference As String
     Private pathReference As String
     Private referencePath As String
+
+#Region "global Variable"
+    Private Division As String
+    Private Insurer As String
+    Private PolClass As String
+    Private InvoiceClass As String
+#End Region
+
 #Region "Buttons"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSelectRaw.Click
         Using dialog As New OpenFileDialog
@@ -45,6 +53,14 @@ Public Class Form1
         Dim filenameReference As String = txtReferenceData.Text
         If txtReferenceData.Text.Length > 0 Then
             filenameReference = txtReferenceData.Text
+
+            'get the last cell for reference sheets start
+            Division = lastCell(filenameReference, "Division")
+            Insurer = lastCell(filenameReference, "Insurer")
+            PolClass = lastCell(filenameReference, "PolClass")
+            InvoiceClass = lastCell(filenameReference, "InvoiceClass")
+            'get the last cell for reference sheets end
+
         Else
             MsgBox("Please select reference File")
             Exit Sub
@@ -73,31 +89,31 @@ Public Class Form1
             'devicion
             .Columns("E:E").Insert(Microsoft.Office.Interop.Excel.Constants.xlLeft)
             .Cells(1, 5).value = "Division"
-            .Cells(2, 5).value = "=VLOOKUP(D2,'" + referencePath + "Division'!$A$1:$B$13,2,)"
+            .Cells(2, 5).value = "=VLOOKUP(D2,'" + referencePath + "Division'!$A$1:" + Division + ",2,)"
             .Cells(2, 5).Copy()
             .Range("E3:E" + splt(2)).PasteSpecial(Excel.XlPasteType.xlPasteFormulasAndNumberFormats)
             'Creditor Name
             .Columns("I:I").Insert(Microsoft.Office.Interop.Excel.Constants.xlLeft)
             .Cells(1, 9).value = "Creditor Name"
-            .Cells(2, 9).value = "=VLOOKUP(H2,'" + referencePath + "Insurer'!$A$1:$B$152,2)"
+            .Cells(2, 9).value = "=VLOOKUP(H2,'" + referencePath + "Insurer'!$A$1:" + Insurer + ",2)"
             .Cells(2, 9).Copy()
             .Range("I3:I" + splt(2)).PasteSpecial(Excel.XlPasteType.xlPasteFormulasAndNumberFormats)
             'Policy Class Name 
             .Columns("N:N").Insert(Microsoft.Office.Interop.Excel.Constants.xlLeft)
             .Cells(1, 14).value = "Policy Class Name"
-            .Cells(2, 14).value = "=CONCATENATE(M2,""-"",VLOOKUP(M2,'" + referencePath + "PolClass'!$A$2:$B$66,2))"
+            .Cells(2, 14).value = "=CONCATENATE(M2,""-"",VLOOKUP(M2,'" + referencePath + "PolClass'!$A$2:" + PolClass + ",2))"
             .Cells(2, 14).Copy()
             .Range("N3:N" + splt(2)).PasteSpecial(Excel.XlPasteType.xlPasteFormulasAndNumberFormats)
             'Howden 
             .Columns("O:O").Insert(Microsoft.Office.Interop.Excel.Constants.xlLeft)
             .Cells(1, 15).value = "Howden Class"
-            .Cells(2, 15).value = "=VLOOKUP(M2,'" + referencePath + "PolClass'!$A$2:$B$66,2)"
+            .Cells(2, 15).value = "=VLOOKUP(M2,'" + referencePath + "PolClass'!$A$2:" + PolClass + ",2)"
             .Cells(2, 15).Copy()
             .Range("O3:O" + splt(2)).PasteSpecial(Excel.XlPasteType.xlPasteFormulasAndNumberFormats)
             'Invoice Class
             .Columns("AT:AT").Insert(Microsoft.Office.Interop.Excel.Constants.xlLeft)
             .Cells(1, 46).value = "Invoice Class"
-            .Cells(2, 46).value = "=VLOOKUP(AS2,'" + referencePath + "InvoiceClass'!$A$2:$B$7,2)"
+            .Cells(2, 46).value = "=VLOOKUP(AS2,'" + referencePath + "InvoiceClass'!$A$2:" + InvoiceClass + ",2)"
             .Cells(2, 46).Copy()
             .Range("AT3:AT" + splt(2)).PasteSpecial(Excel.XlPasteType.xlPasteFormulasAndNumberFormats)
 
@@ -113,7 +129,7 @@ Public Class Form1
     End Sub
 
 
-
+#Region "Create Pivot"
     'create pivot
     Private Sub CreatePivot(ByVal xlApp As Excel.Application, ByVal xlWorkBook As Excel.Workbook, ByVal xlWorkSheet As Excel.Worksheet)
         Dim xlWorkBookPivot As Excel.Workbook
@@ -290,4 +306,24 @@ Public Class Form1
 
 
     End Sub
+#End Region
+
+    Private Function lastCell(ByVal fileNameTable As String, ByVal sheetName As String) As String
+        Dim xlApp As Excel.Application
+        Dim xlWorkBook As Excel.Workbook
+        Dim xlWorkSheet As Excel.Worksheet
+
+        Dim ret As String
+
+        xlApp = New Excel.Application
+        xlWorkBook = xlApp.Workbooks.Open(fileNameTable)
+        xlWorkSheet = xlWorkBook.Worksheets(sheetName)
+
+
+        ret = xlWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell).Address
+        Return ret
+        xlApp.Quit()
+    End Function
+
+
 End Class
